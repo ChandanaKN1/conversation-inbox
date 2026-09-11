@@ -8,6 +8,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null)
 
   const [sortType, setSortType] = useState<"default" | "highToLow" | "lowToHigh">("default")
+  const [failedId, setFailedId] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,10 +30,13 @@ export default function App() {
   }, [])
 
   const handleResolve = async (id: string) => {
+    setFailedId(null)
     try {
-      await fetch(`/api/conversations/${id}`, {
+      const res = await fetch(`/api/conversations/${id}`, {
         method: "PATCH"
       })
+
+      if (!res.ok) throw new Error("Failed")
 
       setConversations(prev =>
         prev.map(c =>
@@ -40,7 +44,7 @@ export default function App() {
         )
       )
     } catch {
-      alert("Failed to resolve conversation")
+      setFailedId(id)
     }
   }
 
@@ -79,7 +83,11 @@ export default function App() {
         <option value="lowToHigh">Low → High</option>
       </select>
 
-      <ConversationList conversations={displayConversations} onResolve={handleResolve} />
+      <ConversationList
+        conversations={displayConversations}
+        onResolve={handleResolve}
+        failedId={failedId}
+      />
     </div>
   )
 }

@@ -3,9 +3,10 @@ import type { Conversation } from "../types/conversation"
 type Props = {
   conversation: Conversation
   onResolve: (id: string) => void
+  hasFailed: boolean
 }
 
-export default function ConversationItem({ conversation, onResolve }: Props) {
+export default function ConversationItem({ conversation, onResolve, hasFailed }: Props) {
   return (
     <div style={{ border: "1px solid gray", margin: "10px", padding: "10px" }}>
       <h3>{conversation.customerName}</h3>
@@ -19,6 +20,8 @@ export default function ConversationItem({ conversation, onResolve }: Props) {
       >
         Resolve
       </button>
+
+      {hasFailed && <p>Couldn't resolve. Try again.</p>}
     </div>
   )
 }
