@@ -5,4 +5,6 @@ export type Conversation = {
   priority: "high" | "medium" | "low"
   status: "pending" | "resolved"
   createdAt: number
+  escalationReason: "angry_customer" | "low_csat" | "edge_case"
+  waitingSinceMinutes: number
 }
