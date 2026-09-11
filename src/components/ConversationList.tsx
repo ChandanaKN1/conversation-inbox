@@ -3,19 +3,19 @@ import ConversationItem from "./ConversationItem"
 
 type Props = {
   conversations: Conversation[]
-  onResolve: (id: string) => void
-  failedId: string | null
+  selectedId: string | null
+  onSelect: (id: string) => void
 }
 
-export default function ConversationList({ conversations, onResolve, failedId }: Props) {
+export default function ConversationList({ conversations, selectedId, onSelect }: Props) {
   return (
     <div>
       {conversations.map((c) => (
         <ConversationItem
           key={c.id}
           conversation={c}
-          onResolve={onResolve}
-          hasFailed={c.id === failedId}
+          isSelected={c.id === selectedId}
+          onSelect={onSelect}
         />
       ))}
     </div>
