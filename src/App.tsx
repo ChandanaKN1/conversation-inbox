@@ -114,7 +114,7 @@ export default function App() {
     low: 3
   }
 
-  let displayConversations = [...conversations]
+  const displayConversations = [...conversations]
 
   if (sortType === "highToLow") {
     displayConversations.sort(
