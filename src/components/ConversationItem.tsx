@@ -17,9 +17,11 @@ export default function ConversationItem({ conversation, isSelected, onSelect }:
   const isResolved = conversation.status === "resolved"
 
   return (
-    <div
+    <button
+      type="button"
       onClick={() => onSelect(conversation.id)}
-      className={`cursor-pointer border-b border-l-4 border-gray-100 px-4 py-3 transition-all hover:bg-gray-50 ${
+      aria-current={isSelected ? "true" : undefined}
+      className={`w-full text-left cursor-pointer border-b border-l-4 border-gray-100 px-4 py-3 transition-all hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset ${
         isSelected ? "border-l-blue-500 bg-blue-50" : "border-l-transparent"
       } ${isResolved ? "opacity-50" : ""}`}
     >
@@ -41,6 +43,6 @@ export default function ConversationItem({ conversation, isSelected, onSelect }:
         <Clock className="w-3 h-3" />
         <span>{conversation.waitingSinceMinutes} min</span>
       </div>
-    </div>
+    </button>
   )
 }
