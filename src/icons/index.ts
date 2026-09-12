@@ -5,5 +5,7 @@ export {
   Clock,
   AlertCircle,
   MessageSquareOff,
-  Send
+  Send,
+  Mail,
+  Phone
 } from "lucide-react"
